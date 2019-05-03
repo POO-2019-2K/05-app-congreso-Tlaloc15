@@ -14,12 +14,26 @@
     <link rel="stylesheet" type="text/css" href="Congreso.css" />
   </head>
   <body>
-      <div class="jumbotron">
+      <div class="titulo">
           <h1> Congreso Anual de Talleres del Estado de Colima </h1>
       </div>
     <div class="jumbotron">
-      <h1>Congreso de Talleres</h1>
-      <p>Registro de Talleres para el congreso</p>
+      <h1>Selecciona al Taller que deseas inscribirte</h1>
+      <p></p>
+      <div class="col-md-8">
+          <table id="congreso" class="table">
+            <thead>
+              <tr>
+                <th>Nombre de taller</th>
+                <th>Fecha de Inicio</th>
+                <th>Fecha de Termino</th>
+                <th>Espacios disponibles</th>
+                <th>Horas</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
     </div>
     <div class="container-fluid">
       <div class="row">
@@ -33,7 +47,7 @@
                   type="text"
                   class="form-control"
                   id="name"
-                  placeholder="Juan Pérez"
+                  placeholder="Dibujo"
                   required
                 />
                 <div class="valid-feedback">Correcto!</div>
@@ -73,11 +87,11 @@
                 <div class="invalid-feedback">Introduzca un número valido</div>
               </div>
               <div class="form-group">
-                <label for="duracion">Duración del evento</label>
+                <label for="horas">Duración del evento</label>
                 <input 
                 type="number" 
                 class="form-control" 
-                id="disponibles"
+                id="horas"
                 placeholder="(Horas)" />
                 <div class="valid-feedback">Correcto!</div>
                 <div class="invalid-feedback">Introduzca un numero válido valido</div>
