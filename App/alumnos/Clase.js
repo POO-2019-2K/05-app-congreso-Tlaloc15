@@ -13,13 +13,12 @@ this._initTables();
 }
 
 _initTables() {
-let lsTalleres = JSON.parse(localStorage.getItem("Talleres"));
-if (lsTalleres === null) {
+let lsAlumnos = JSON.parse(localStorage.getItem("Alumnos"));
+if (lsAlumnos === null) {
     return;
 }
-lsTalleres.forEach((e, index) => {
-    e.fInicial = new Date(e.fInicial);
-    e.fTermino = new Date(e.fTermino);
+lsAlumnos.forEach((e, index) => {
+    e.birthday = new Date(e.birthday);
 
     this._addToTable(new Alumnos(e));
 });
@@ -30,30 +29,36 @@ _addToTable(alumno) {
 let row = this._tableClase.insertRow(-1);
 //En la tabla grande 
 let cellName = row.insertCell(0);
-let cellFInicial = row.insertCell(1);
-let cellFTermino = row.insertCell(2);
-row.insertCell(3);
+let cellEmail = row.insertCell(1);
+let cellBirthday = row.insertCell(2);
+let cellAge = row.insertCell(3);
 row.insertCell(4);
+row.insertCell(5);
 
 cellName.innerHTML = alumno.name;
-cellFInicial.innerHTML = alumno.getFIncialAsString();
-cellFTermino.innerHTML = alumno.getFTerminoAsString();
+cellEmail.innerHTML = alumno.email;
+cellBirthday.innerHTML = alumno.getBirthdayAsString();
+cellAge.innerHTML = alumno.getAge();
+
+this._numAlumnos++;
+
+this._tableInfo.rows[0].cells[1].innerHTML = this._numAlumnos;
 
 let objAlumno = {
           name: alumno.name,
           email: alumno.email,
-          birthday: alumno.sbirthday,
+          birthday: alumno.birthday
           
 };
 
 this._alumnos.push(objAlumno);
 }
 
-_findName(name){//encontrar el nombre
+_findEmail(email){//encontrar el nombre
 let found = -1 
 
 this._alumnos.forEach((e, index)=>{
-    if(e.name === name)
+    if(e.email === email)
     {
     found = index;
     return;
@@ -63,16 +68,16 @@ return found;
 }
 
 addAlumnos(alumno) {
-let found = this._findName(alumno.name);
+let found = this._findEmail(alumno.email);
 if (found >= 0){
     swal.fire({
     type: "error",
     title: "error",
-    text: "El taller ya esta registrado"
+    text: "El alumno ya esta registrado"
     });
     return;
 }
 this._addToTable(alumno);
-localStorage.setItem("alumnos", JSON.stringify(this._alumnos));
+localStorage.setItem("Alumnos", JSON.stringify(this._alumnos));
 }
 }

@@ -14,16 +14,16 @@ class Main {
       if (form.checkValidity() === true) {
         let name = document.querySelector("#name").value;
         let email = document.querySelector("#email").value;
-        let birthday = document.querySelector("#birthday").value;
-        birthday = birthday.split("-");
+        let sbirthday = document.querySelector("#birthday").value;
+        sbirthday = sbirthday.split("-");
 
-        let sbirthday = new Date(birthday[0], birthday[1] - 1, birthday[2]);
+        let birthday = new Date(sbirthday[0], sbirthday[1] - 1, sbirthday[2]);
         
 
         let objAlumno = {
           name: name,
           email: email,
-          birthday: sbirthday
+          birthday: birthday
           
 
         };
