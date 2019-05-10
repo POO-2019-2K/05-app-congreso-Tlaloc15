@@ -13,12 +13,12 @@ class Main {
 
       if (form.checkValidity() === true) {
         let name = document.querySelector("#name").value;
-        let sfIncio = document.querySelector("#fIncio").value;
-        sfIncio = sfIncio.split("-");
+        let sfIncial = document.querySelector("#fIncial").value;
+        sfIncial = sfIncial.split("-");
         let sfTermino = document.querySelector("#fTermino").value;
         sfTermino = sfTermino.split("-");
 
-        let fIncial = new Date(sfIncio[0], sfIncio[1] - 1, sfIncio[2]);
+        let fIncial = new Date(sfIncial[0], sfIncial[1] - 1, sfIncial[2]);
         let fTermino = new Date(sfTermino[0], sfTermino[1] - 1, sfTermino[2]);
 
         let disponibles = document.querySelector("#disponibles").value;
