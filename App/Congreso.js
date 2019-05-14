@@ -5,10 +5,11 @@ export default class Congreso {
         this._tableCongreso = tableCongreso;
         this._tableInfo = tableInfo;
         this._numTalleres = 0;
-        this._lugares = 0;
+        this._disponibles = 0;
         this._Ocupados = 0;
 
         this._talleres = [];
+        this._iTaller = [];
 
         //localStorage.removeItem("Talleres");
         this._initTables();
@@ -27,75 +28,73 @@ export default class Congreso {
         });
     }
 
-    _cancelEdit(row, taller) {
-        row.cells[0].innerHTML = taller.name;
-        row.cells[1].innerHTML = taller.fIncial;
-        row.cells[2].innerHTML = taller.fTermino;
-        row.cells[2].innerHTML = taller.disponibles;
-        row.cells[2].innerHTML = taller.horas;
-    }
 
-
-
-    _agregarAlumnos(row, taller){
+    _agregarAlumnos(row, taller) {
 
     let btnParticipantes = document.createElement("input");
     btnParticipantes.type = "button";
     btnParticipantes.value = "Agregar Alumno";
     btnParticipantes.className = "btn btn-success";
     btnParticipantes.addEventListener("click", () => {
-      location.href='../alumnos/Alumnos.html';
-    });
-    row.cells[5].innerHtml = "";
-    row.cells[5].appendChild(btnParticipantes);
+        this._limpiador();
+        let nombretaller = 
+      {
+        taller: taller.name,
+        disponibles: taller.disponibles,
+      };
+        this._iTaller.push(nombretaller);
+        localStorage.setItem("iTaller", JSON.stringify(this._iTaller));
+        location.href='../alumnos/Alumnos.html';
+      })
+    row.cells[6].innerHtml = "";
+    row.cells[6].appendChild(btnParticipantes);
     }
+    _limpiador()
+  {
+    localStorage.removeItem("iTaller");
+    console.log("iTaller");
+  }
 
-    _addEditDeleteToRow(row, taller) {
-        let btnEdit = document.createElement("input"); 
-        btnEdit.type = "button";
-        btnEdit.value = "Editar";
-        btnEdit.className = "btn btn-warning";
-        btnEdit.addEventListener("click", () => {
-            this._editRow(row, taller);
-
-    });
+    _addDeleteToRow(row) {
 
         let btnDelete = document.createElement("input");
         btnDelete.type = "button";
         btnDelete.value = "Borrar";
         btnDelete.className = "btn btn-danger";
 
-    row.cells[6].innerHTML = "";
-    row.cells[6].appendChild(btnEdit);
     row.cells[7].innerHTML = "";
     row.cells[7].appendChild(btnDelete);
+
 }
 
 
     _addToTable(taller) {
+
+        this._disponibles = Number(taller.disponibles);
+        this._disponibles = this._disponibles - this._Ocupados;
+
         let row = this._tableCongreso.insertRow(-1);
         //En la tabla grande 
         let cellName = row.insertCell(0);
         let cellFInicial = row.insertCell(1);
         let cellFTermino = row.insertCell(2);
         let cellDisponible = row.insertCell(3);
-        let cellHoras = row.insertCell(4);
-        row.insertCell(5);
-
-        this._agregarAlumnos(row, taller);
-        
+        let cellOcupados = row.insertCell(4);
+        let cellHoras = row.insertCell(5);
+        row.insertCell(6);
+        row.insertCell(7);
         
 
         cellName.innerHTML = taller.name;
         cellFInicial.innerHTML = taller.getFIncialAsString();
         cellFTermino.innerHTML = taller.getFTerminoAsString();
         cellDisponible.innerHTML = taller.disponibles;
+        cellOcupados.innerHTML = this._Ocupados;
         cellHoras.innerHTML = taller.horas;
-        row.insertCell(5);
-        row.insertCell(6);
-        row.insertCell(7);
 
-        this._addEditDeleteToRow(row, taller)
+        this._agregarAlumnos(row, taller);
+        this._addDeleteToRow(row, taller);
+        
 
         this._numTalleres++;
         this._tableInfo.rows[0].cells[1].innerHTML = this._numTalleres;
@@ -103,7 +102,7 @@ export default class Congreso {
 
 
         let objTaller = {
-            name: taller.name,
+            taller: taller.name,
             fIncial: taller.fIncial,
             fTermino: taller.fTermino,
             disponibles: taller.disponibles,

@@ -8,7 +8,7 @@ class Main {
       document.querySelector("#info")
     );
 
-    document.querySelector("#btnAdd").addEventListener("click", () => {
+    document.querySelector("#btnAdd2").addEventListener("click", () => {
       let form = document.querySelector("#form");
 
       if (form.checkValidity() === true) {
