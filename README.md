@@ -1,4 +1,5 @@
  # Ejercicio 5 El Congreso
+ [![Codacy Badge](https://api.codacy.com/project/badge/Grade/090755e9a7e841ddadfd96967d297a39)](https://www.codacy.com/app/Tlaloc15/05-app-congreso-Tlaloc15?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=POO-2019-2K/05-app-congreso-Tlaloc15&amp;utm_campaign=Badge_Grade)
 
 ## Tiempo para realizar la actividad
 
