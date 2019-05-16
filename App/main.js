@@ -25,7 +25,7 @@ class Main {
         let horas = document.querySelector("#horas").value;
 
         let objTaller = {
-          name: name,
+          taller: name,
           fIncial: fIncial,
           fTermino: fTermino,
           disponibles: disponibles,

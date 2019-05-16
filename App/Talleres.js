@@ -1,6 +1,7 @@
 export default class Taller {
     constructor(taller) {
-      this._name = taller.name;
+      this._taller = taller.taller;
+      this._Ocupados = taller.ocupados;
       this._fIncial = taller.fIncial;
       this._fTermino = taller.fTermino;
       this._disponibles = taller.disponibles;
@@ -24,8 +25,12 @@ export default class Taller {
       ];
     }
   
-    get name() {
-      return this._name;
+    get taller() {
+      return this._taller;
+    }
+
+    get ocupados(){
+      return this._Ocupados;
     }
   
   

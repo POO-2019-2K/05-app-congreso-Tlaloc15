@@ -11,12 +11,12 @@ export default class Congreso {
         this._talleres = [];
         this._iTaller = [];
 
-        //localStorage.removeItem("Talleres");
+        //localStorage.removeItem("talleres");
         this._initTables();
     }
 
     _initTables() {
-        let lsTalleres = JSON.parse(localStorage.getItem("Talleres"));
+        let lsTalleres = JSON.parse(localStorage.getItem("talleres"));
         if (lsTalleres === null) {
             return;
         }
@@ -36,24 +36,18 @@ export default class Congreso {
     btnParticipantes.value = "Agregar Alumno";
     btnParticipantes.className = "btn btn-success";
     btnParticipantes.addEventListener("click", () => {
-        this._limpiador();
         let nombretaller = 
       {
-        taller: taller.name,
+        taller: taller.taller,
         disponibles: taller.disponibles,
       };
         this._iTaller.push(nombretaller);
         localStorage.setItem("iTaller", JSON.stringify(this._iTaller));
-        location.href='../alumnos/Alumnos.html';
+        location.href='Alumnos.html';
       })
     row.cells[6].innerHtml = "";
     row.cells[6].appendChild(btnParticipantes);
     }
-    _limpiador()
-  {
-    localStorage.removeItem("iTaller");
-    console.log("iTaller");
-  }
 
     _addDeleteToRow(row) {
 
@@ -85,7 +79,7 @@ export default class Congreso {
         row.insertCell(7);
         
 
-        cellName.innerHTML = taller.name;
+        cellName.innerHTML = taller.taller;
         cellFInicial.innerHTML = taller.getFIncialAsString();
         cellFTermino.innerHTML = taller.getFTerminoAsString();
         cellDisponible.innerHTML = taller.disponibles;
@@ -102,7 +96,7 @@ export default class Congreso {
 
 
         let objTaller = {
-            taller: taller.name,
+            taller: taller.taller,
             fIncial: taller.fIncial,
             fTermino: taller.fTermino,
             disponibles: taller.disponibles,
@@ -112,11 +106,11 @@ export default class Congreso {
         this._talleres.push(objTaller);
     }
 
-    _findName(name) { //encontrar el nombre
+    _findName(taller) { //encontrar el nombre
         let found = -1
 
         this._talleres.forEach((e, index) => {
-            if (e.name === name) {
+            if (e.taller === taller) {
                 found = index;
                 return;
             }
@@ -125,7 +119,7 @@ export default class Congreso {
     }
 
     addTaller(taller) {
-        let found = this._findName(taller.name);
+        let found = this._findName(taller.taller);
         if (found >= 0) {
             swal.fire({
                 type: "error",
@@ -135,6 +129,6 @@ export default class Congreso {
             return;
         }
         this._addToTable(taller);
-        localStorage.setItem("Talleres", JSON.stringify(this._talleres));
+        localStorage.setItem("talleres", JSON.stringify(this._talleres));
     }
 }
